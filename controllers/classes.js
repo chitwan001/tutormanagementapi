@@ -47,3 +47,8 @@ exports.deleteClass = (req,res,next) => {
     })
   })
 }
+exports.getClassId = (req,res,next) => {
+  classes.findById(req.body.cid).then(data => {
+    res.send(data);
+  })
+}
