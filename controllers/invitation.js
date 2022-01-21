@@ -17,3 +17,13 @@ exports.createInvi = (req,res,next) => {
     
     })
 }
+exports.getInviStu = (req,res,next) => {
+    invitationModel.find({bystudent : req.userId}).then(data => {
+        res.send(data);
+    })
+}
+exports.getInviTut = (req,res,next) => {
+    invitationModel.find({totutor : [req.userId]}).then(data => {
+        res.send(data);
+    })
+}
