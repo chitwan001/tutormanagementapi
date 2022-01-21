@@ -52,3 +52,8 @@ exports.getClassId = (req,res,next) => {
     res.send(data);
   })
 }
+exports.getClassCourse = (req,res,next) => {
+  classes.find({img : req.body.course}).then(data => {
+    res.send(data);
+  })
+}
