@@ -25,7 +25,25 @@ exports.getInviStu = (req,res,next) => {
     })
 }
 exports.getInviTut = (req,res,next) => {
-    invitationModel.find({totutor : [req.userId]}).then(data => {
+    invitationModel.find({totutor : [req.userId] , isaccepted : false}).then(data => {
         res.send(data);
+    })
+}
+exports.acceptinvi = (req,res,next) => {
+    invitationModel.updateOne({_id : req.body.inviid},{
+        isaccepted : true
+    }).then(data => {
+        classModel.findById(req.body.batchid).then(batchdata => {
+            var avalslots = batchdata.availableslots;
+            var stual = batchdata.students;
+            classModel.updateOne({_id : req.body.batchid},{
+                students : [...stual , req.body.stuid],
+                availableslots : avalslots - 1
+            }).then(data => {
+                res.send({
+                    response : 'ok'
+                })
+            })
+        })
     })
 }
