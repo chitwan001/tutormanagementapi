@@ -33,7 +33,8 @@ exports.createClass = (req,res,next) => {
 }
 exports.getClassesTeachers = (req,res,next) => {
 
-  classes.find({teachers : '61e942098e49710661d498b8'}).then(classes => {
-    res.send(classes);
-  })
+  // classes.find({teachers : '61e942098e49710661d498b8'}).then(classes => {
+  //   res.send(classes);
+  // })
+  res.send({hello : 'here'});
 }
