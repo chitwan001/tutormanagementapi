@@ -17,6 +17,7 @@ exports.createClass = (req,res,next) => {
       teachers : [req.userId],
       classcodefs : 'ASD123',
       classcodeft : 'QWR432',
+      maxstudents: req.body.max,
       master : tname
     })
     newclass.save().then(data => {
