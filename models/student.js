@@ -26,10 +26,6 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
-  subjects : {
-    type: Array,
-    required : true
-  },
   activeat : {
     type : Date,
     required : true

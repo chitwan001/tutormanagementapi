@@ -23,10 +23,6 @@ const tutorSchema = new Schema({
     type: Array,
     required : true
   },
-  subjectstoteach : {
-    type: Array,
-    required : true
-  },
   isactive : {
     type : Boolean,
     required : true

@@ -38,3 +38,10 @@ exports.getClassesTeachers = (req,res,next) => {
   })
   // res.send({hello : 'here'});
 }
+exports.deleteClass = (req,res,next) => {
+  classes.remove({_id : req.body.cid }).then(data => {
+    res.send({
+      response : 'ok'
+    })
+  })
+}

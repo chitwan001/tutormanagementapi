@@ -5,10 +5,11 @@ exports.signupstudent = (req,res,next) => {
   bcrypt.hash(req.body.pass,12).then(hashedpass => {
     const newstudent = new studentModel({
       name : req.body.name,
-      class : req.body.class,
+      class : req.body.edu,
       email : req.body.email,
       password : hashedpass,
       dob : req.body.dob,
+      type: 'Student',
       activeat : new Date()
     });
     newstudent.save().then(result => {
@@ -23,7 +24,10 @@ exports.signuptutor = (req,res,next) => {
   console.log(req.body);
   const newtutor = new tutorModel({
     name : req.body.name,
-    degree : req.body.degree,
+    email : req.body.email,
+      password : hashedpass,
+      type : 'Tutor',
+    degree : req.body.edu,
     subjectstoteach : req.body.stt,
     isactive : true
   });
