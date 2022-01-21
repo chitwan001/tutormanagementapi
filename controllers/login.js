@@ -41,7 +41,7 @@ exports.loginRequest = (req,res,next) => {
     if(data.length != 0){
       console.log(data);
       loadeduser = data[0];
-      var compare1 = data.password == req.body.password;
+      var compare1 = bcrypt.compare(data.password,req.body.password);
       return compare1;
     }
     else{
