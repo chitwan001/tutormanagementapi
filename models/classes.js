@@ -41,6 +41,10 @@ const classesSchema = new Schema({
     ref: 'Announcement',
     required: false
   },
+  img: {
+    type: String,
+    required: true
+  },
   maxstudents : {
     type : Number,
     required: true
