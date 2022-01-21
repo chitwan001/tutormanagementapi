@@ -4,7 +4,7 @@ exports.createClass = (req,res,next) => {
   console.log(req.body);
   var classid;
   var classesarr = [];
-  tutors.findById(req.body.userId).then(teacher => {
+  tutors.findById(req.userId).then(teacher => {
     var tname = teacher.name;
     classesarr = teacher.tutorofclass;
     console.log(tname);
@@ -14,7 +14,7 @@ exports.createClass = (req,res,next) => {
       name : req.body.bname,
       batchname : req.body.wbatch,
       subject : req.body.subject,
-      teachers : [req.body.userId],
+      teachers : [req.userId],
       classcodefs : 'ASD123',
       classcodeft : 'QWR432',
       master : tname
@@ -23,7 +23,7 @@ exports.createClass = (req,res,next) => {
       console.log(data);
       classid = data._id;
       classesarr.push(classid);
-      tutors.updateOne({_id : req.body.userId},{
+      tutors.updateOne({_id : req.userId},{
         tutorofclass : classesarr
       }).then(abcd => {
         res.send({response : 'ok'})
@@ -33,7 +33,7 @@ exports.createClass = (req,res,next) => {
 }
 exports.getClassesTeachers = (req,res,next) => {
 
-  classes.find({teachers : req.body.userId}).then(classes => {
+  classes.find({teachers : req.userId}).then(classes => {
     res.send(classes);
   })
   // res.send({hello : 'here'});

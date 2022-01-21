@@ -4,7 +4,7 @@ module.exports = (req,res,next) => {
   const authHeader = req.get('Authorization');
   if(!authHeader){
     console.log('not set!');
-    res.send({not : "NOT"});
+    res.send({not : "NOT"})
   }
   else{
     const token = authHeader.split(' ')[1];
