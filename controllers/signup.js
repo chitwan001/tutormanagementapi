@@ -28,7 +28,6 @@ exports.signuptutor = (req,res,next) => {
     password : hashedpass,
     type : 'Tutor',
     degree : req.body.edu,
-    subjectstoteach : req.body.stt,
     isactive : true
   });
   newtutor.save().then(result => {
