@@ -29,6 +29,7 @@ app.use('/',(req,res,next) =>{
 mongoose.connect('mongodb+srv://chitwan001:id5TIq1CGdGLegXO@cluster0.yowm9.mongodb.net/TutorManagement?retryWrites=true&w=majority').then(result =>{
     console.log('Connected!');
     app.listen(process.env.PORT || 3000);
+    res.send({hello : 'mongodb'});
 }).catch(err => {
     console.log(err);
 })
