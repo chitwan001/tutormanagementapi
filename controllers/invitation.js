@@ -36,9 +36,12 @@ exports.acceptinvi = (req,res,next) => {
         classModel.findById(req.body.batchid).then(batchdata => {
             var avalslots = batchdata.availableslots;
             var stual = batchdata.students;
+            stual = [...stual , req.body.stuid];
+            console.log(avalslots);
+            avalslots--;
             classModel.updateOne({_id : req.body.batchid},{
-                students : [...stual , req.body.stuid],
-                availableslots : avalslots - 1
+                students : stual,
+                availableslots : avalslots
             }).then(data => {
                 res.send({
                     response : 'ok'
