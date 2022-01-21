@@ -7,6 +7,18 @@ const invitationsSchema = new Schema({
     ref: 'Student',
     required : true
   },
+  batchname : {
+    type: String,
+    required: true
+  },
+  subject : {
+    type: String,
+    required: true
+  },
+  teacher : {
+    type: String,
+    required: true
+  },
   totutor : {
     type: [Schema.Types.ObjectId , String],
     ref: 'Tutor',

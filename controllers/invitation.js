@@ -6,6 +6,9 @@ exports.createInvi = (req,res,next) => {
         const newInvi = new invitationModel({
             bystudent : req.userId,
             totutor : data.teachers,
+            batchname : req.batch,
+            subject : req.subject,
+            teacher : req.teacher,
             forbatch : req.body.cid,
             isaccepted : false
         });
