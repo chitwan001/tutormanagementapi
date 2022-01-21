@@ -3,13 +3,14 @@ const student = require('../models/student');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 exports.loginRequest = (req,res,next) => {
-  // console.log(req.body);
+  console.log(req.body);
   var loadeduser = null;
   tutor.find({email : req.body.email}).then(data => {
     if(data.length != 0){
       console.log(data);
       loadeduser = data[0];
-      var compare = data.password == req.body.password;
+      var compare = bcrypt.compare(req.body.pass , loadeduser.password);
+      console.log(compare);
       return compare;
     }
     else{
@@ -41,7 +42,7 @@ exports.loginRequest = (req,res,next) => {
     if(data.length != 0){
       console.log(data);
       loadeduser = data[0];
-      var compare1 = data.password == req.body.password;
+      var compare1 = bcrypt.compare(req.body.pass, loadeduser.password);
       return compare1;
     }
     else{
