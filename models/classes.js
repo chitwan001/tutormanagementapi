@@ -40,6 +40,10 @@ const classesSchema = new Schema({
     type : [Schema.Types.ObjectId],
     ref: 'Announcement',
     required: false
+  },
+  maxstudents : {
+    type : Number,
+    required: true
   }
 },{
   timestamps : true
