@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const loginRoutes = require('./routes/login');
 const signupRoutes = require('./routes/signup');
 const classesRoutes = require('./routes/classes');
+const inviRoutes = require('./routes/invitations');
 const isauth = require('./middlewares/is-auth');
 app.use(bodyParser.json());
 
@@ -21,6 +22,7 @@ app.use((req,res,next) =>{
 app.use('/signup',signupRoutes);
 app.use('/classes',classesRoutes);
 app.use('/login',loginRoutes);
+app.use('/invites',inviRoutes);
 app.use('/',(req,res,next) =>{
   console.log("connected!");
   res.send({hello : 'hello'});

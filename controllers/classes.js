@@ -18,6 +18,7 @@ exports.createClass = (req,res,next) => {
       classcodefs : 'ASD123',
       classcodeft : 'QWR432',
       maxstudents: req.body.max,
+      availableslots : req.body.max,
       img : req.body.img,
       master : tname
     })

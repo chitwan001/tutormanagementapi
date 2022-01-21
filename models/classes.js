@@ -45,6 +45,10 @@ const classesSchema = new Schema({
     type: String,
     required: true
   },
+  availableslots : {
+    type : Number,
+    required : true
+  },
   maxstudents : {
     type : Number,
     required: true
