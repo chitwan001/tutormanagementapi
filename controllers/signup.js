@@ -22,18 +22,22 @@ exports.signupstudent = (req,res,next) => {
 }
 exports.signuptutor = (req,res,next) => {
   console.log(req.body);
-  const newtutor = new tutorModel({
-    name : req.body.name,
-    email : req.body.email,
-    password : hashedpass,
-    type : 'Tutor',
-    degree : req.body.deg,
-    isactive : true
-  });
-  newtutor.save().then(result => {
-    console.log(result);
-    res.send({
-      response : 'ok'
+  bcrypt.hash(req.body.pass,12).then(hashedpass => {
+    console.log(hashedpass);
+    const newtutor = new tutorModel({
+      name : req.body.name,
+      email : req.body.email,
+      password : hashedpass,
+      type : 'Tutor',
+      degree : req.body.deg,
+      isactive : true
+    });
+    newtutor.save().then(result => {
+      console.log(result);
+      res.send({
+        response : 'ok'
+      })
     })
   })
+  
 }
