@@ -1,14 +1,13 @@
 const invitationModel = require('../models/invitations');
 const classModel = require('../models/classes');
 exports.createInvi = (req,res,next) => {
-
     classModel.findById(req.body.cid).then(data => {
         const newInvi = new invitationModel({
             bystudent : req.userId,
             totutor : data.teachers,
-            batchname : req.batch,
-            subject : req.subject,
-            teacher : req.teacher,
+            batchname : req.body.batch,
+            subject : req.body.subject,
+            teacher : req.body.teacher,
             forbatch : req.body.cid,
             isaccepted : false
         });
