@@ -63,6 +63,18 @@ exports.getClassId = (req,res,next) => {
 }
 exports.getClassCourse = (req,res,next) => {
   classes.find({img : req.body.course}).then(data => {
+    console.log(data.length);
+    for(let i=0 ; i<data.length ; i++){
+      var students = data[i].students;
+      for(let stu of students){
+        // console.log(stu);
+        if(stu == req.userId){
+          data.splice(i,1);
+          break;
+        }
+      }
+    }
+    // console.log(data);
     res.send(data);
   })
 }
