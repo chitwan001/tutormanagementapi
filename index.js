@@ -8,6 +8,7 @@ const loginRoutes = require('./routes/login');
 const signupRoutes = require('./routes/signup');
 const classesRoutes = require('./routes/classes');
 const inviRoutes = require('./routes/invitations');
+const announceRoutes = require('./routes/announcement');
 const isauth = require('./middlewares/is-auth');
 app.use(bodyParser.json());
 
@@ -23,6 +24,7 @@ app.use('/signup',signupRoutes);
 app.use('/classes',classesRoutes);
 app.use('/login',loginRoutes);
 app.use('/invites',inviRoutes);
+app.use('/announcement',announceRoutes);
 app.use('/',(req,res,next) =>{
   console.log("connected!");
   res.send({hello : 'hello'});
