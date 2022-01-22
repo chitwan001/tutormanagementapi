@@ -7,5 +7,6 @@ routes.post('/delete',isauth,classesController.deleteClass);
 routes.post('/getclassid',isauth,classesController.getClassId);
 routes.post('/getclasscourse',isauth,classesController.getClassCourse);
 routes.get('/gcft',isauth,classesController.getClassesTeachers);
+routes.get('/gcfs',isauth,classesController.getClassesStu);
 
 module.exports = routes;
