@@ -96,3 +96,18 @@ exports.getStuname = (req,res,next) => {
     res.send({name : data.name});
   })
 }
+exports.getmixname = (req,res,next) => {
+  tutors.findById(req.body.stuid).then(data => {
+    console.log(data);
+    if(data != null){
+      tutors.findById(req.body.stuid).then(tutdata => {
+        res.send({name : tutdata.name});
+      })
+    }
+    else{
+      student.findById(req.body.stuid).then(studata => {
+        res.send({name : studata.name});
+      })
+    }
+  })
+}

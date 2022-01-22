@@ -6,7 +6,7 @@ const loginController = require('../controllers/login');
 
 routes.get('/gettutorname',isauth,loginController.gettutorname);
 routes.get('/getstuname',isauth,loginController.getstuname);
-routes.post('/changeusernamestu',loginController.changeunamestu);
-routes.post('/changeusernameteach',loginController.changeunameteach);
+routes.post('/changeunamestu',isauth,loginController.changeunamestu);
+routes.post('/changeunameteach',isauth,loginController.changeunameteach);
 routes.post('',loginController.loginRequest);
 module.exports = routes;
