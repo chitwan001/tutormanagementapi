@@ -27,7 +27,7 @@ app.use('/invites',inviRoutes);
 app.use('/announcement',announceRoutes);
 app.use('/',(req,res,next) =>{
   console.log("connected!");
-  res.send({hello : 'hello'});
+  res.send({hello : 'Kya hai'});
 })
 
 mongoose.connect('mongodb+srv://chitwan001:id5TIq1CGdGLegXO@cluster0.yowm9.mongodb.net/TutorManagement?retryWrites=true&w=majority').then(result =>{

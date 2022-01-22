@@ -2,6 +2,18 @@ const tutor = require('../models/tutor');
 const student = require('../models/student');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+exports.gettutorname = (req,res,next) => {
+  tutor.findById('61eaf214c6c451ac036965f5').then(data => {
+    var tutorname = data.name;
+    res.send({name : tutorname.split(' ')[0]});
+  })
+}
+exports.getstuname = (req,res,next) => {
+  student.findById(req.userId).then(data => {
+    var tutorname = data.name;
+    res.send({name : tutorname.split(' ')[0]});
+  })
+}
 exports.loginRequest = (req,res,next) => {
   console.log(req.body);
   var loadeduser = null;

@@ -59,3 +59,8 @@ exports.acceptinvi = (req,res,next) => {
         
     })
 }
+exports.delete = (req,res,next) => {
+    invitationModel.remove({_id : req.body.inviid}).then(data => {
+        res.send({response : 'ok'});
+    })
+}

@@ -6,6 +6,8 @@ routes.post('/create',isauth,classesController.createClass);
 routes.post('/delete',isauth,classesController.deleteClass);
 routes.post('/getclassid',isauth,classesController.getClassId);
 routes.post('/getclasscourse',isauth,classesController.getClassCourse);
+routes.post('/unenroll',isauth,classesController.unenroll);
+routes.post('/getstuleft',isauth,classesController.getstuleft);
 routes.get('/gcft',isauth,classesController.getClassesTeachers);
 routes.get('/gcfs',isauth,classesController.getClassesStu);
 

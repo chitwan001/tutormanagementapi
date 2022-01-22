@@ -66,3 +66,28 @@ exports.getClassCourse = (req,res,next) => {
     res.send(data);
   })
 }
+exports.unenroll = (req,res,next) => {
+  classes.findById(req.body.cid).then(data => {
+    var stuarr = data.students;
+    console.log(stuarr);
+    for(var i=0 ;i<stuarr.length ; i++){
+      if(stuarr[i] == req.userId){
+        // console.log(stuarr[i]);
+        break;
+      }
+    }
+    var updatedstuarr = stuarr.splice(i,1);
+    console.log(req.userId , stuarr);
+    classes.updateOne({_id : req.body.cid},{
+      students : stuarr
+    }).then(data => {
+      res.send({response : 'ok'});
+    })
+  })
+}
+exports.getstuleft = (req,res,next) => {
+  classes.findById(req.body.cid).then(data => {
+    var leftstu = data.availableslots
+    res.send({left : leftstu});
+  })
+}
