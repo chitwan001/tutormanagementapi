@@ -9,6 +9,7 @@ const signupRoutes = require('./routes/signup');
 const classesRoutes = require('./routes/classes');
 const inviRoutes = require('./routes/invitations');
 const announceRoutes = require('./routes/announcement');
+const favsRoutes = require('./routes/favs');
 const isauth = require('./middlewares/is-auth');
 const path  = require('path');
 
@@ -47,6 +48,7 @@ app.use('/classes',classesRoutes);
 app.use('/login',loginRoutes);
 app.use('/invites',inviRoutes);
 app.use('/announcement',announceRoutes);
+app.use('/favs',favsRoutes);
 app.use('/',(req,res,next) =>{
   console.log("connected!");
   res.send({hello : 'Kya hai'});
