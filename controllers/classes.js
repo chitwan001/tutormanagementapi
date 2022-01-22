@@ -91,3 +91,8 @@ exports.getstuleft = (req,res,next) => {
     res.send({left : leftstu});
   })
 }
+exports.getStuname = (req,res,next) => {
+  student.findById(req.body.stuid).then(data => {
+    res.send({name : data.name});
+  })
+}

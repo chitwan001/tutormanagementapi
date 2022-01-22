@@ -3,7 +3,7 @@ const student = require('../models/student');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 exports.gettutorname = (req,res,next) => {
-  tutor.findById('61eaf214c6c451ac036965f5').then(data => {
+  tutor.findById(req.userId).then(data => {
     var tutorname = data.name;
     res.send({name : tutorname.split(' ')[0]});
   })
