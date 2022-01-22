@@ -81,3 +81,33 @@ exports.loginRequest = (req,res,next) => {
     console.log(err);
   })
 }
+exports.changeunamestu = (req,res,next) => {
+  student.findById(req.userId).then(data => {
+    var pass = data.password;
+    var compare = bcrypt.compare(req.body.pass , pass);
+    return compare;
+  }).then(comp => {
+    if(comp == true){
+      student.updateOne({_id : req.userId},{
+        name : req.body.newname
+      }).then(data => {
+        res.send({response : 'ok'});
+      })
+    }
+  })
+}
+exports.changeunameteach = (req,res,next) => {
+  tutor.findById(req.userId).then(data => {
+    var pass = data.password;
+    var compare = bcrypt.compare(req.body.pass , pass);
+    return compare;
+  }).then(comp => {
+    if(comp == true){
+      tutor.updateOne({_id : req.userId},{
+        name : req.body.newname
+      }).then(data => {
+        res.send({response : 'ok'});
+      })
+    }
+  })
+}
