@@ -1,5 +1,6 @@
 const classes = require('../models/classes');
 const tutors = require('../models/tutor');
+const student = require('../models/student');
 exports.createClass = (req,res,next) => {
   console.log(req.body);
   var classid;
@@ -36,14 +37,14 @@ exports.createClass = (req,res,next) => {
 }
 exports.getClassesTeachers = (req,res,next) => {
 
-  classes.find({teachers : [req.userId]}).then(classes => {
+  classes.find({teachers : req.userId}).then(classes => {
     res.send(classes);
   })
   // res.send({hello : 'here'});
 }
 exports.getClassesStu= (req,res,next) => {
 
-  classes.find({students : [req.userId]}).then(classes => {
+  classes.find({students : req.userId}).then(classes => {
     res.send(classes);
   })
   // res.send({hello : 'here'});

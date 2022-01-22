@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const invitationsSchema = new Schema({
   bystudent : {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'Student',
     required : true
   },
@@ -15,12 +15,16 @@ const invitationsSchema = new Schema({
     type: String,
     required: true
   },
+  stuname : {
+    type: String,
+    required: true
+  },
   teacher : {
     type: String,
     required: true
   },
   totutor : {
-    type: [Schema.Types.ObjectId , String],
+    type: [Schema.Types.ObjectId],
     ref: 'Tutor',
     required : true
   },

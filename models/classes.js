@@ -15,13 +15,11 @@ const classesSchema = new Schema({
     required : true
   },
   students : {
-    type: [Schema.Types.ObjectId],
-    ref: 'Student',
+    type: [Schema.Types.ObjectId , String],
     required : false
   },
   teachers : {
     type : [Schema.Types.ObjectId, String],
-    ref : 'Tutor',
     required : true
   },
   master : {
