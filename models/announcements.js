@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const announcementSchema = new Schema({
   content : {
     type: String,
-    required : true
+    required : false
   },
   attachements : {
     type: Array,

@@ -98,7 +98,7 @@ exports.getStuname = (req,res,next) => {
 }
 exports.getmixname = (req,res,next) => {
   tutors.findById(req.body.stuid).then(data => {
-    console.log(data);
+    // console.log(data);
     if(data != null){
       tutors.findById(req.body.stuid).then(tutdata => {
         res.send({name : tutdata.name});
