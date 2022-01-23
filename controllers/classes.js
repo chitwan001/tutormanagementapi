@@ -6,6 +6,11 @@ exports.createClass = (req,res,next) => {
   var classid;
   var classesarr = [];
   tutors.findById(req.userId).then(teacher => {
+    if(teacher == null){
+      const err = new Error('Teacher not found!');
+      err.statusCode = 404;
+      throw err;
+    }
     var tname = teacher.name;
     classesarr = teacher.tutorofclass;
     console.log(tname);
@@ -32,20 +37,50 @@ exports.createClass = (req,res,next) => {
       }).then(abcd => {
         res.send({response : 'ok'})
       })
+    }).catch(err => {
+      if(!err.statusCode){
+        err.statusCode = 500;
+    }
+    next(err);
     })
+  }).catch(err => {
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
 }
 exports.getClassesTeachers = (req,res,next) => {
 
-  classes.find({teachers : req.userId}).then(classes => {
-    res.send(classes);
+  classes.find({teachers : req.userId}).then(cdata => {
+    if(cdata.length == 0){
+      const err = new Error('Class not found!');
+                    err.statusCode = 404;
+                    throw err;
+    }
+    res.send(cdata);
+  }).catch(err => {
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
   // res.send({hello : 'here'});
 }
 exports.getClassesStu= (req,res,next) => {
 
-  classes.find({students : req.userId}).then(classes => {
-    res.send(classes);
+  classes.find({students : req.userId}).then(classd => {
+    if(classd.length == 0){
+      const err = new Error('Class not found!');
+                    err.statusCode = 404;
+                    throw err;
+    }
+    res.send(classd);
+  }).catch(err => {
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
   // res.send({hello : 'here'});
 }

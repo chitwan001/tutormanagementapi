@@ -9,7 +9,7 @@ const signupRoutes = require('./routes/signup');
 const classesRoutes = require('./routes/classes');
 const inviRoutes = require('./routes/invitations');
 const announceRoutes = require('./routes/announcement');
-const favsRoutes = require('./routes/favs');
+const favsRoutes = require('./routes/announcement');
 const isauth = require('./middlewares/is-auth');
 const path  = require('path');
 
@@ -53,6 +53,7 @@ app.use('/',(req,res,next) =>{
   console.log("connected!");
   res.send({hello : 'Kya hai'});
 })
+
 
 mongoose.connect('mongodb+srv://chitwan001:id5TIq1CGdGLegXO@cluster0.yowm9.mongodb.net/TutorManagement?retryWrites=true&w=majority').then(result =>{
     console.log('Connected!');

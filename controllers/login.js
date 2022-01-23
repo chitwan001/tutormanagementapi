@@ -17,6 +17,7 @@ exports.getstuname = (req,res,next) => {
 exports.loginRequest = (req,res,next) => {
   console.log(req.body);
   var loadeduser = null;
+  var check = false;
   tutor.find({email : req.body.email}).then(data => {
     if(data.length != 0){
       console.log(data);
@@ -26,29 +27,37 @@ exports.loginRequest = (req,res,next) => {
       return compare;
     }
     else{
-      return false;
+      check = false;
+      return 'NA';
     }
   }).then(compare => {
-    console.log(compare);
-    if(compare){
-      console.log(loadeduser._id);
+    // console.log(compare);
+    if(compare == true){
+      // console.log(loadeduser._id);
       const token = jwt.sign({
         email : loadeduser.email,
         userId : loadeduser._id
-      },'q0ceyhwmxk',{
-        expiresIn: '1h'
-      });
+      },'q0ceyhwmxk');
       return token;
     }
-    else{
-      return null;
+    else if(compare == 'NA'){
+      return 'NA';
     }
   }).then(comp => {
-    if(comp){
+    if(comp !='NA'){
       return res.send({token : comp , userId: loadeduser._id,type : loadeduser.type});
     }
+    else if(comp=='NA'){
+      
+    }
+    else{
+      res.send({messge : 'Password not matched'});
+    }
   }).catch(err => {
-    console.log(err);
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
   student.find({email : req.body.email}).then(data => {
     if(data.length != 0){
@@ -58,7 +67,7 @@ exports.loginRequest = (req,res,next) => {
       return compare1;
     }
     else{
-      return false;
+      return res.send({messge : 'Email not available for login. Sign up!'});
     }
   }).then(compare1 => {
     if(compare1){
@@ -71,21 +80,28 @@ exports.loginRequest = (req,res,next) => {
       return token;
     }
     else{
-      return null;
+      return res.send({messge : 'Password not matched!'});
     }
   }).then(comp => {
     if(comp){
       return res.send({token : comp , userId: loadeduser._id,type : loadeduser.type});
     }
   }).catch(err => {
-    console.log(err);
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
 }
 exports.changeunamestu = (req,res,next) => {
   student.findById(req.userId).then(data => {
     var pass = data.password;
     var compare = bcrypt.compare(req.body.pass , pass);
-    return compare;
+    if(compare == true){
+      return compare;
+    }else{
+      res.send({messge : 'Password not matched!'});
+    }
   }).then(comp => {
     if(comp == true){
       student.updateOne({_id : req.userId},{
@@ -94,19 +110,33 @@ exports.changeunamestu = (req,res,next) => {
         res.send({response : 'ok'});
       })
     }
+  }).catch(err => {
+    if(!err.statusCode){
+      err.statusCode = 500;
+  }
+  next(err);
   })
 }
 exports.changeunameteach = (req,res,next) => {
   tutor.findById(req.userId).then(data => {
     var pass = data.password;
     var compare = bcrypt.compare(req.body.pass , pass);
-    return compare;
+    if(compare == true){
+      return compare;
+    }else{
+      res.send({messge : 'Password not matched'});
+    }
   }).then(comp => {
     if(comp == true){
       tutor.updateOne({_id : req.userId},{
         name : req.body.newname
       }).then(data => {
         res.send({response : 'ok'});
+      }).catch(err => {
+        if(!err.statusCode){
+          err.statusCode = 500;
+      }
+      next(err);
       })
     }
   })

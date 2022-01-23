@@ -14,7 +14,13 @@ exports.sendannounce = (req,res,next) => {
         });
         announce.save().then(data => {
             classModel.findById(req.body.classid).then(gotclass => {
-                var oldannounces = gotclass.announcements;
+                if(gotclass == null){
+                    const err = new Error('Class not found!');
+                    err.statusCode = 404;
+                    throw err;
+                }
+                else{
+                    var oldannounces = gotclass.announcements;
                 oldannounces = [...oldannounces , data._id];
                 classModel.updateOne({_id : req.body.classid},{
                     announcements : oldannounces
@@ -23,7 +29,18 @@ exports.sendannounce = (req,res,next) => {
                         response : 'ok'
                     })
                 })
+                }
+            }).catch(err => {
+                if(!err.statusCode){
+                    err.statusCode = 500;
+                }
+                next(err);
             })
+        }).catch(err => {
+            if(!err.statusCode){
+                err.statusCode = 500;
+            }
+            next(err);
         })
     }
     else{
@@ -35,7 +52,13 @@ exports.sendannounce = (req,res,next) => {
         });
         announce.save().then(data => {
             classModel.findById(req.body.classid).then(gotclass => {
-                var oldannounces = gotclass.announcements;
+                if(gotclass == null){
+                    const err = new Error('Class not found!');
+                    err.statusCode = 404;
+                    throw err;
+                }
+                else{
+                    var oldannounces = gotclass.announcements;
                 oldannounces = [...oldannounces , data._id];
                 classModel.updateOne({_id : req.body.classid},{
                     announcements : oldannounces
@@ -44,13 +67,34 @@ exports.sendannounce = (req,res,next) => {
                         response : 'ok'
                     })
                 })
+                }
+            }).catch(err => {
+                if(!err.statusCode){
+                    err.statusCode = 500;
+                }
+                next(err);
             })
+        }).catch(err => {
+            if(!err.statusCode){
+                err.statusCode = 500;
+            }
+            next(err);
         })
     }
 }
 exports.getannounce = (req,res,next) => {
     // console.log(path.join(__dirname, 'attachements'));
     announceModel.find({whichclass : req.body.classid}).sort({createdAt : -1}).then(data => {
+        if(data.length == 0){
+            const err = new Error('Announcement not found');
+            err.statusCode = 404;
+            throw err;
+        }
         res.send(data);
+    }).catch(err => {
+        if(!err.statusCode){
+            err.statusCode = 500;
+        }
+        next(err);
     })
 }
